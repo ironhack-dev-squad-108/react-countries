@@ -6,6 +6,7 @@ import AddCountry from './pages/AddCountry';
 import Secret from './pages/Secret';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import CountryDetail from './pages/CountryDetail';
 import api from '../api';
 import logo from '../logo.svg';
 
@@ -37,12 +38,13 @@ class App extends Component {
           <NavLink to="/secret">Secret</NavLink>
         </header>
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/countries" component={Countries} />
-          <Route path="/add-country" component={AddCountry} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/login" component={Login} />
-          <Route path="/secret" component={Secret} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/countries" component={Countries} />
+          <Route exact path="/countries/:countryId" component={CountryDetail} />
+          <Route exact path="/add-country" component={AddCountry} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/secret" component={Secret} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
       </div>

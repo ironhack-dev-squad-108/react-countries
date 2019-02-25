@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom'
 import api from '../../api';
 
 class Countries extends Component {
@@ -30,7 +31,9 @@ class Countries extends Component {
         {/* `c` represents the current country */}
         <ul>
           {this.state.countries.map(c => <li key={c._id}>
-            {c.name} <button onClick={()=>this.deleteCountry(c._id)}>Delete</button>
+            {c.name}{' '}
+            <Link to={"/countries/"+c._id}>Detail</Link>{' '}
+            <button onClick={()=>this.deleteCountry(c._id)}>Delete</button>
           </li>)}
         </ul>
         {this.state.message && <div className="info">

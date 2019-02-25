@@ -18,6 +18,14 @@ router.get('/', (req, res, next) => {
     .catch(err => next(err))
 });
 
+router.get('/:id', (req, res, next) => {
+  Country.findById(req.params.id)
+    .then(country => {
+      res.json(country);
+    })
+    .catch(err => next(err))
+});
+
 // Route to add a country
 router.post('/', (req, res, next) => {
   let { name, capitals, area, description } = req.body
