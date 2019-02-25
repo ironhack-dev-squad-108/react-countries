@@ -1,5 +1,6 @@
 const express = require('express');
 const Country = require('../models/Country')
+const parser = require('../configs/cloudinary')
 const { isLoggedIn } = require('../middlewares')
 const router = express.Router();
 
@@ -28,10 +29,18 @@ router.get('/:id', (req, res, next) => {
 });
 
 // Route to add a country (protected)
-router.post('/', isLoggedIn, (req, res, next) => {
+router.post('/', isLoggedIn, parser.single('flagPicture'), (req, res, next) => {
   let { name, capitals, area, description } = req.body
   let _creator = req.user._id // req.user contains information about the connected user
-  Country.create({ name, capitals, area, description, _creator })
+  let flagUrl = req.file.url
+  Country.create({
+    name,
+    capitals,
+    area,
+    description,
+    _creator,
+    flagUrl
+  })
     .then(country => {
       res.json({
         success: true,

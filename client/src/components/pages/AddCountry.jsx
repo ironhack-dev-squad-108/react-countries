@@ -11,8 +11,10 @@ class AddCountry extends Component {
       capitals: "",
       area: "",
       description: "",
-      message: null
+      flagPicture: null,
+      message: null,
     }
+    this.handleFileChange = this.handleFileChange.bind(this)
   }
 
   handleInputChange(stateFieldName, event) {
@@ -25,13 +27,19 @@ class AddCountry extends Component {
   handleClick(e) {
     e.preventDefault()
     console.log(this.state.name, this.state.description)
-    let data = {
-      name: this.state.name,
-      capitals: this.state.capitals,
-      area: this.state.area,
-      description: this.state.description,
-    }
-    api.postCountries(data)
+    // let data = {
+    //   name: this.state.name,
+    //   capitals: this.state.capitals,
+    //   area: this.state.area,
+    //   description: this.state.description,
+    // }
+    let formData = new FormData()
+    formData.append("name", this.state.name);
+    formData.append("capitals", this.state.capitals);
+    formData.append("area", this.state.area);
+    formData.append("description", this.state.description);
+    formData.append("flagPicture", this.state.flagPicture);
+    api.postCountries(formData)
       .then(result => {
         console.log('SUCCESS!')
         this.setState({
@@ -39,7 +47,7 @@ class AddCountry extends Component {
           capitals: "",
           area: "",
           description: "",
-          message: `Your country '${this.state.name}' has been created`
+          message: `Your country '${this.state.name}' has been created`,
         })
         setTimeout(() => {
           this.setState({
@@ -49,6 +57,13 @@ class AddCountry extends Component {
       })
       .catch(err => this.setState({ message: err.toString() }))
   }
+
+  handleFileChange(e) {
+    this.setState({
+      flagPicture: e.target.files[0]
+    })
+  }
+
   render() {
     // If we are not connected, redirect the user to "/login"
     if (!api.isLoggedIn()) {
@@ -62,6 +77,7 @@ class AddCountry extends Component {
           Capitals: <input type="text" value={this.state.capitals} onChange={(e) => { this.handleInputChange("capitals", e) }} /> <br />
           Area: <input type="number" value={this.state.area} onChange={(e) => { this.handleInputChange("area", e) }} /> <br />
           Description: <textarea value={this.state.description} cols="30" rows="10" onChange={(e) => { this.handleInputChange("description", e) }} ></textarea> <br />
+          Flag File: <input type="file" onChange={this.handleFileChange} /><br />
           <button onClick={(e) => this.handleClick(e)}>Create country</button>
         </form>
         {this.state.message && <div className="info">

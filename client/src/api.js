@@ -69,9 +69,13 @@ export default {
       .catch(errHandler)
   },
 
-  postCountries(data) {
+  postCountries(formData) {
     return service
-      .post('/countries', data)
+      .post('/countries', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
+      })
       .then(res => res.data)
       .catch(errHandler)
   },

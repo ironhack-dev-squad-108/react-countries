@@ -19,6 +19,9 @@ const countrySchema = new mongoose.Schema({
   _creator: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
+  },
+  flagUrl: {
+    type: String,
   }
 });
 

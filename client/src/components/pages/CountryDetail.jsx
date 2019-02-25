@@ -20,6 +20,9 @@ export default class CountryDetail extends Component {
         <strong>Area</strong>: {this.state.country.area}<br/>
         <strong>Description</strong>: {this.state.country.description}<br/>
         <strong>Creator</strong>: {this.state.country._creator.username}<br/>
+        <strong>Flag</strong>: <br/>
+        <img src={this.state.country.flagUrl} alt="flag"/><br/>
+        
       </div>
     )
   }
