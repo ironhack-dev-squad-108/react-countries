@@ -33,6 +33,7 @@ class Countries extends Component {
           {this.state.countries.map(c => <li key={c._id}>
             {c.name}{' '}
             <Link to={"/countries/"+c._id}>Detail</Link>{' '}
+            <Link to={"/edit-country/"+c._id}>Edit</Link>{' '}
             <button onClick={()=>this.deleteCountry(c._id)}>Delete</button>
           </li>)}
         </ul>

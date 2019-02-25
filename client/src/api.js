@@ -83,6 +83,13 @@ export default {
       .catch(errHandler)
   },
 
+  editCountry(countryId, body) {
+    return service
+      .put('/countries/'+countryId, body)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
   getSecret() {
     return service
       .get('/secret')

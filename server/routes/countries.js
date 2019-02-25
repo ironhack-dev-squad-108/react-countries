@@ -51,4 +51,21 @@ router.delete('/:id', (req,res,next)=>{
     .catch(err => next(err))
 })
 
+// The route is PUT /api/countries/:id
+router.put('/:id', (req,res,next)=>{
+  Country.findByIdAndUpdate(req.params.id, {
+    name: req.body.name,
+    description: req.body.description,
+    capitals: req.body.capitals,
+    area: req.body.area,
+  }, { new: true }) // To access the updated country (and not the old country)
+    .then(country => {
+      res.json({
+        message: "The country has been updated",
+        country: country
+      })
+    })
+    .catch(err => next(err))
+})
+
 module.exports = router;
