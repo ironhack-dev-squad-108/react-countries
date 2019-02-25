@@ -32,7 +32,10 @@ class App extends Component {
           <h1 className="App-title">MERN Boilerplate</h1>
           <NavLink to="/" exact>Home</NavLink>
           <NavLink to="/countries">Countries</NavLink>
-          <NavLink to="/add-country">Add country</NavLink>
+
+          {/* The NavLink "Add country" is displayed only when the user is connected */}
+          {api.isLoggedIn() && <NavLink to="/add-country">Add country</NavLink>}
+
           {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
           {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
           {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}

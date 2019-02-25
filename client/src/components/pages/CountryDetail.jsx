@@ -19,6 +19,7 @@ export default class CountryDetail extends Component {
         <strong>Capitals</strong>: {this.state.country.capitals.join(', ')}<br/>
         <strong>Area</strong>: {this.state.country.area}<br/>
         <strong>Description</strong>: {this.state.country.description}<br/>
+        <strong>Creator</strong>: {this.state.country._creator.username}<br/>
       </div>
     )
   }

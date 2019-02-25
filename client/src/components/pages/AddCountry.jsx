@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
 import api from '../../api';
 
 
@@ -49,6 +50,10 @@ class AddCountry extends Component {
       .catch(err => this.setState({ message: err.toString() }))
   }
   render() {
+    // If we are not connected, redirect the user to "/login"
+    if (!api.isLoggedIn()) {
+      return <Redirect to="/login" />
+    }
     return (
       <div className="AddCountry">
         <h2>Add country</h2>

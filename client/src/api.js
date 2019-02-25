@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const service = axios.create({
   baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api',
-  withCredentials: true
+  withCredentials: true, // The cookie with session informations are sent
 })
 
 const errHandler = err => {
