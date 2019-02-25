@@ -31,4 +31,16 @@ router.post('/', (req, res, next) => {
     .catch(err => next(err))
 });
 
+// The route is DELETE /api/countries/:id
+router.delete('/:id', (req,res,next)=>{
+  Country.findByIdAndDelete(req.params.id)
+    .then(country => {
+      res.json({
+        message: "The country was deleted",
+        country: country // The deleted country is sent
+      })
+    })
+    .catch(err => next(err))
+})
+
 module.exports = router;

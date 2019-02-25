@@ -1,5 +1,8 @@
 import axios from 'axios'
 
+// https://ironhack.herokuapp.com/
+// baseURL: https://ironhack.herokuapp.com/api
+
 const service = axios.create({
   baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api',
   withCredentials: true
@@ -62,6 +65,13 @@ export default {
   postCountries(data) {
     return service
       .post('/countries', data)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+  deleteCountry(countryId) {
+    return service
+      .delete('/countries/'+countryId)
       .then(res => res.data)
       .catch(errHandler)
   },
